@@ -1,5 +1,5 @@
 import React from "react";
-import { MainWrapper } from "./weather.module";
+import './weather.css'
 import { AiOutlineSearch } from "react-icons/ai";
 import { WiHumidity } from "react-icons/wi";
 import { SiWindicss } from "react-icons/si";
@@ -106,7 +106,8 @@ console.log(api_Endpoint, api_key)
       </span>
     );
   };
-
+console.log(weatherData);
+const temperature = Number(weatherData?.main?.temp?.toFixed(0)) -273
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -122,59 +123,59 @@ console.log(api_Endpoint, api_key)
   }, [fetchCurrentWeather]);
 
   return (
-    <MainWrapper>
       <div className="container">
-        <div className="searchArea">
-          <input
-            type="text"
-            placeholder="enter a city"
-            value={searchCity}
-            onChange={(e) => setSearchCity(e.target.value)}
-          />
+        <div>
+          <div className="searchArea">
+            <input
+              type="text"
+              placeholder="Enter a city"
+              value={searchCity}
+              onChange={(e) => setSearchCity(e.target.value)}
+            />
 
-          <div className="searchCircle">
-            <AiOutlineSearch className="searchIcon" onClick={handleSearch} />
+            <div className="searchCircle">
+              <AiOutlineSearch className="searchIcon" onClick={handleSearch} />
+            </div>
           </div>
+
+          {weatherData && isLoading ? (
+            <>
+              <div className="weatherArea">
+                <h1 className="cityName">{weatherData.name}</h1>
+                <span>{weatherData.sys.country}</span>
+                <div className="icon">
+                  {iconChanger(weatherData.weather[0].main)}
+                </div>
+                <h1>{temperature}&deg;c</h1>
+                <h2>{weatherData.weather[0].main}</h2>
+              </div>
+
+              <div className="bottomInfoArea">
+                <div className="humidityLevel">
+                  <WiHumidity className="windIcon" />
+                  <div className="humidInfo">
+                    <h1>{weatherData.main.humidity}%</h1>
+                    <p>Humidity</p>
+                  </div>
+                </div>
+
+                <div className="wind">
+                  <SiWindicss className="windIcon" />
+                  <div className="humidInfo">
+                    <h1>{weatherData.wind.speed}km/h</h1>
+                    <p>Wind speed</p>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="loading">
+              <RiLoaderFill className="loadingIcon" />
+              <p>Loading</p>
+            </div>
+          )}
         </div>
-
-        {weatherData && isLoading ? (
-          <>
-            <div className="weatherArea">
-              <h1>{weatherData.name}</h1>
-              <span>{weatherData.sys.country}</span>
-              <div className="icon">
-                {iconChanger(weatherData.weather[0].main)}
-              </div>
-              <h1>{weatherData.main.temp.toFixed(0)}</h1>
-              <h2>{weatherData.weather[0].main}</h2>
-            </div>
-
-            <div className="bottomInfoArea">
-              <div className="humidityLevel">
-                <WiHumidity className="windIcon" />
-                <div className="humidInfo">
-                  <h1>{weatherData.main.humidity}%</h1>
-                  <p>Humidity</p>
-                </div>
-              </div>
-
-              <div className="wind">
-                <SiWindicss className="windIcon" />
-                <div className="humidInfo">
-                  <h1>{weatherData.wind.speed}km/h</h1>
-                  <p>Wind speed</p>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="loading">
-            <RiLoaderFill className="loadingIcon" />
-            <p>Loading</p>
-          </div>
-        )}
       </div>
-    </MainWrapper>
   );
 };
 

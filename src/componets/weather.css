@@ -1,27 +1,21 @@
-import styled from "styled-components";
+body{
+    background: linear-gradient(to right, #c7c7eb, #ccf2dd);
+}
 
-
-export const MainWrapper = styled.div`
-height: 100vh;
-background: linear-gradient(to right, #c7c7eb, #ccf2dd);
-.container {
+.container > div {
 background-color: #ffffff7d;
 border-radius: 12px;
 padding: 2rem;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
 box-sizing: border-box;
 color: rgba(0, 0, 0, 0.8);
 background-blend-mode: overlay;
+width: 100%;
+margin: auto;
+display: flex;
 justify-content: space-between;
 align-items: center;
 flex-direction: column;
-position: absolute;
 }
-
 
 .searchArea {
 margin-top: 20px;
@@ -36,27 +30,29 @@ width: 100%;
 outline: none;
 border: none;
 border: 1px solid grey;
-padding: 8px;
+padding: 16px;
 border-radius: 20px;
 text-align: center;
 width: 80%;
 background: transparent;
+background-color: white;
 }
 .searchCircle {
 border: 1px solid grey;
-width: 30px; /* Adjust the width of the circle as needed */
-height: 30px; /* Ensure the height matches the width for a perfect circle */
+width: 48px; 
+height: 48px; 
 border-radius: 50%;
 display: flex;
 justify-content: center;
 align-items: center;
 cursor: pointer;
+background-color: white;
 
+}
 
-> .searchIcon {
+.searchCircle > .searchIcon {
 font-size: 20px;
 color: grey;
-}
 }
 
 
@@ -65,37 +61,29 @@ display: flex;
 align-items: center;
 flex-direction: column;
 margin: 30px 0;
-
-
-> .icon {
-font-size: 9rem;
-
-
-/* DO LATER NOT WHEN CREATING UI */
 }
 
 
-> h1 {
-font-size: 3rem;
+.weatherArea > .icon {
+font-size: 8rem;
+}
 
-
+.weatherArea> h1 {
+font-size: 2rem;
 font-family: "Bebas Neue", sans-serif;
+margin-bottom: .5rem;
 }
 
-
-> span {
+.weatherArea > span {
 margin-bottom: 10px;
 font-family: "Inter", sans-serif;
-}
+} 
 
-
-> h2 {
+.weatherArea> h2 {
 font-size: 2rem;
 font-family: "Inter", sans-serif;
 font-weight: 400;
 }
-}
-
 
 .bottomInfoArea {
 display: flex;
@@ -116,19 +104,21 @@ padding: 10px;
 display: flex;
 align-items: center;
 margin: 0 20px;
-
-
-> .humidIcon {
-font-size: 3rem;
-}
 }
 
+.humidityLevel,
+.wind > .humidIcon {
+font-size: 1.5rem;
+}
 
 .windIcon {
 font-size: 2rem;
 margin-right: 10px;
 }
 
+.humidInfo h1{
+    font-size: 1.5rem;
+}
 
 .loading {
 height: 400px;
@@ -138,31 +128,30 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 z-index: 9999;
+}
 
-
-.loadingIcon {
+.loading .loadingIcon {
 font-size: 3rem;
-/* DO LATER NOT WHEN CREATING UI */
 animation: spin 2s linear infinite;
 }
-p {
+.loading .loadingIcon p {
 font-size: 22px;
 margin-top: 10px;
 font-family: "Josefin Sans", sans-serif;
 }
-}
 
-
-/* DO LATER NOT WHEN CREATING UI */
 @keyframes spin {
-from {
-transform: rotate(0deg);
+    from {
+    transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
+    }
 }
-to {
-transform: rotate(360deg);
+
+@media screen and (min-width: 768px) {
+    .container > div{
+        margin: auto;
+        width: 50%;
+    }
 }
-}
-`;
-
-
-
